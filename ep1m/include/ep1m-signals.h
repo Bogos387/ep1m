@@ -79,6 +79,7 @@ enum
     SIGNAL_KONTROLLER = 102, // Главная рукоятка КМ
 
     // КЛУБ-У
+    SIGNAL_GAME_TIME            = 148,
     SIGNAL_KLUB_U_ZAPRET_OTPUSKA= 149,
     SIGNAL_KLUB_U_POWER_SUPPLAY = 150,   // питание
     SIGNAL_KLUB_U_EPK           = 151,   // ЭПК

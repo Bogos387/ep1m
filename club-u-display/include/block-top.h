@@ -18,7 +18,6 @@
 
 
 #include <QLabel>
-#include <QTimer>
 
 #include    "image-widget.h"
 #include    "text-paint.h"
@@ -48,6 +47,7 @@ public:
     void setCassete(bool flag);
     void setCoordinate(double coordinate);
     void setStationName(QString stationName);
+    void setGameTime(int val);
 
 
 private:
@@ -65,8 +65,6 @@ private:
 
     double oldCoordinate_;
     QString oldStation_;
-
-    QTimer timeTimer_;
 
 
 };

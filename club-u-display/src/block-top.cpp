@@ -2,8 +2,6 @@
 
 #include "cmath"
 
-#include <QTime>
-
 
 
 //-----------------------------------------------------------------------------
@@ -83,14 +81,6 @@ TopBlock::TopBlock(QSize size, QWidget *parent)
     txtPaintCurTimeS_->setFonts(13, Qt::green, 87);
     txtPaintCurTimeS_->setParams(2, 19);
     txtPaintCurTimeS_->setPointForDigit(6, 16);
-
-    connect(&timeTimer_, &QTimer::timeout, [&]()
-    {
-        txtPaintCurTimeH_->setText(QString::number(QTime::currentTime().hour()));
-        txtPaintCurTimeM_->setText(QString::number(QTime::currentTime().minute()));
-        txtPaintCurTimeS_->setText(QString::number(QTime::currentTime().second()));
-    });
-    timeTimer_.start(1000);
 
 }
 
@@ -188,6 +178,24 @@ void TopBlock::setStationName(QString stationName)
     txtPaintStation_->setText(stationName.toUpper());
 
     oldStation_ = stationName;
+}
+
+
+
+//-----------------------------------------------------------------------------
+//
+//-----------------------------------------------------------------------------
+void TopBlock::setGameTime(int val)
+{
+    QString timeDigits(QString::number(val));
+
+    if (val < 100000) // "10:00:00"
+        for (int i = 0, n = 6 - timeDigits.length(); i < n; ++i)
+            timeDigits.prepend("0");
+
+    txtPaintCurTimeS_->setText(timeDigits.right(2)); timeDigits.chop(2);
+    txtPaintCurTimeM_->setText(timeDigits.right(2)); timeDigits.chop(2);
+    txtPaintCurTimeH_->setText(timeDigits);
 }
 
 

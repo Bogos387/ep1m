@@ -77,7 +77,6 @@ private:
 
 
     QTimer updateTimer_;
-    QTimer timeTimer_;
 
     QTimer timerTC_;
     QTimer timerDB_;

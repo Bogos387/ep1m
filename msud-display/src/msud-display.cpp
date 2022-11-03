@@ -292,17 +292,8 @@ void MsudDisplay::initDisplay_()
 
 
 
-
-
-
     createLab_(labCurTime_, QSize(135, fooH), "yellow", Qt::AlignLeft);
     labCurTime_->move(640, 560);
-
-    connect(&timeTimer_, &QTimer::timeout, [&]()
-    {
-        labCurTime_->setText(QTime::currentTime().toString("hh.mm.ss"));
-    });
-    timeTimer_.start(1000);
 
 
 
@@ -585,6 +576,18 @@ void MsudDisplay::slotUpdateTimer()
 //        labI2_->setText(QString::number(pair2.second));
 //    }
 
+
+    int timeNumber = static_cast<int>(input_signals[SIGNAL_GAME_TIME]);
+    QString timeDigits(QString::number(timeNumber));
+
+    if (timeNumber < 100000) // "10:00:00"
+        for (int i = 0, n = 6 - timeDigits.length(); i < n; ++i)
+            timeDigits.prepend("0");
+
+    timeDigits.insert(4, ".");
+    timeDigits.insert(2, ".");
+
+    labCurTime_->setText(timeDigits);
 
 }
 
